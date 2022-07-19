@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <title>Conversor de medidas</title>
+</head>
+<body onload="load()">
+    
+    <header id="header">
+        <h1>Conversor de medidas</h1>
+    </header>
+
+    <section id="main_section">
+        <section id="section_conversao">
+            <div id="div_tipo_medidas">
+                <p>Escolha um tipo de medida</p>
+                <select id="tipo_medida" onchange="onChange()">
+                    <option value="distancia" selected>Distância</option>
+                    <option value="temperatura">Temperatura</option>
+                    <option value="moeda">Moeda</option>
+                </select>
+            </div>
+
+            <section class="section_medidas">
+                <div class="div_medidas">
+                    <p>Informe a medida e o valor: </p>
+                    <input type="number" id="input_medida_atual" class="input_medida">
+                    <select id="select_medida_atual" class="select_medidas"></select>
+                </div>
+                <input type="button" value="converter" id="botao_converte" onclick="converter()">
+                <div class="div_medidas">
+                    <p>Informe a medida: </p>
+                    <input type="number" id="input_medida_alvo" class="input_medida" disabled> 
+                    <select id="select_medida_alvo" class="select_medidas"></select>
+                </div>
+            </section>
+        </section>
+    </section>
+    
+
+    <script src="./js/index.js"></script>
+</body>
+</html>
