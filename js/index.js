@@ -102,11 +102,11 @@ function converter() {
         var tipoMedida = selectTipoMedida.value
         valorInicial = inputMedidaAtual.value
 
-        if(tipoMedida == 'distancia'){
+        if(tipoMedida === 'distancia'){
             inputMedidaAlvo.value = converterDistancia()
-        } else if(tipoMedida == 'temperatura'){
+        } else if(tipoMedida === 'temperatura'){
             inputMedidaAlvo.value = converterTemperatura()
-        } else if(tipoMedida == 'moeda') {
+        } else if(tipoMedida === 'moeda') {
             inputMedidaAlvo.value = converterMoeda()
         }
     } else {
@@ -122,26 +122,26 @@ function converter() {
  * @returns {number} Valor final da conversão selecionada.
  */
 function converterDistancia () {
-    if(medidaAtual == 'centimetro') {
-        if(medidaAlvo == 'metro'){
+    if(medidaAtual === 'centimetro') {
+        if(medidaAlvo === 'metro'){
             valorFinal = Number(centimetro(valorInicial, 'metro'))
-        } else if(medidaAlvo == 'quilometro'){
+        } else if(medidaAlvo === 'quilometro'){
             valorFinal = Number(centimetro(valorInicial, 'quilometro'))
         } else {
             valorFinal = valorInicial
         }
-    } else if(medidaAtual == 'metro') {
-        if(medidaAlvo == 'centimetro'){
+    } else if(medidaAtual === 'metro') {
+        if(medidaAlvo === 'centimetro'){
             valorFinal = Number(metro(valorInicial, 'centimetro'))
-        } else if(medidaAlvo == 'quilometro'){
+        } else if(medidaAlvo === 'quilometro'){
             valorFinal = Number(metro(valorInicial, 'quilometro'))
         }else {
             valorFinal = valorInicial
         }
-    } else if(medidaAtual == 'quilometro') {
-        if(medidaAlvo == 'centimetro'){
+    } else if(medidaAtual === 'quilometro') {
+        if(medidaAlvo === 'centimetro'){
             valorFinal = Number(quilometro(valorInicial, 'centimetro'))
-        } else if(medidaAlvo == 'metro'){
+        } else if(medidaAlvo === 'metro'){
             valorFinal = Number(quilometro(valorInicial, 'metro'))
         }else {
             valorFinal = valorInicial
@@ -157,9 +157,9 @@ function converterDistancia () {
  * @returns {number} Valor final da conversão de centímetro para a medida alvo
  */
 function centimetro(medida, alvo) {
-    if(alvo == 'metro'){
+    if(alvo === 'metro'){
         return medida / 100
-    } else if(alvo == 'quilometro'){
+    } else if(alvo === 'quilometro'){
         return medida / 100000
     }
 }
@@ -171,9 +171,9 @@ function centimetro(medida, alvo) {
  * @returns {number} Valor final da conversão de metro para a medida alvo
  */
 function metro(medida, alvo) {
-    if(alvo == 'centimetro'){
+    if(alvo === 'centimetro'){
         return medida * 100
-    }else if(alvo == 'quilometro'){
+    }else if(alvo === 'quilometro'){
         return medida / 1000
     }
 }
@@ -185,9 +185,9 @@ function metro(medida, alvo) {
  * @returns {number} Valor final da conversão de quilômetro para a medida alvo
  */
 function quilometro(medida, alvo) {
-    if(alvo == 'centimetro'){
+    if(alvo === 'centimetro'){
         return medida * 100000
-    }else if(alvo == 'metro'){
+    }else if(alvo === 'metro'){
         return medida * 1000
     }
 }
@@ -198,26 +198,26 @@ function quilometro(medida, alvo) {
  * @returns {number} Valor final da conversão selecionada.
  */
 function converterTemperatura () {
-    if(medidaAtual == 'celcius') {
-        if(medidaAlvo == 'kelvin'){
+    if(medidaAtual === 'celcius') {
+        if(medidaAlvo === 'kelvin'){
             valorFinal = Number(celcius(valorInicial, 'kelvin'))
-        } else if(medidaAlvo == 'fahrenheit'){
+        } else if(medidaAlvo === 'fahrenheit'){
             valorFinal = Number(celcius(valorInicial, 'fahrenheit'))
         } else {
             valorFinal = valorInicial
         }
-    } else if(medidaAtual == 'kelvin') {
-        if(medidaAlvo == 'celcius'){
+    } else if(medidaAtual === 'kelvin') {
+        if(medidaAlvo === 'celcius'){
             valorFinal = Number(kelvin(valorInicial, 'celcius'))
-        } else if(medidaAlvo == 'fahrenheit'){
+        } else if(medidaAlvo === 'fahrenheit'){
             valorFinal = Number(kelvin(valorInicial, 'fahrenheit'))
         }else {
             valorFinal = valorInicial
         }
-    } else if(medidaAtual == 'fahrenheit') {
-        if(medidaAlvo == 'celcius'){
+    } else if(medidaAtual === 'fahrenheit') {
+        if(medidaAlvo === 'celcius'){
             valorFinal = Number(fahrenheit(valorInicial, 'celcius'))
-        } else if(medidaAlvo == 'kelvin'){
+        } else if(medidaAlvo === 'kelvin'){
             valorFinal = Number(fahrenheit(valorInicial, 'kelvin'))
         }else {
             valorFinal = valorInicial
@@ -233,9 +233,9 @@ function converterTemperatura () {
  * @returns {number} Valor final da conversão de celcius para a temperatura selecionada.
  */
 function celcius(medida, alvo) {
-    if(alvo == 'kelvin'){
+    if(alvo === 'kelvin'){
         return medida * 1 + 273.15
-    } else if(alvo == 'fahrenheit'){
+    } else if(alvo === 'fahrenheit'){
         return medida * 1.8 + 32
     }
 }
@@ -246,9 +246,9 @@ function celcius(medida, alvo) {
  * @returns {number} Valor final da conversão de kelvin para a temperatura selecionada.
  */
 function kelvin(medida, alvo) {
-    if(alvo == 'celcius'){
+    if(alvo === 'celcius'){
         return medida - 273.15
-    }else if(alvo == 'fahrenheit'){
+    }else if(alvo === 'fahrenheit'){
         return (medida - 273.15) * 1.8 + 32
     }
 }
@@ -260,9 +260,9 @@ function kelvin(medida, alvo) {
  * @returns {number} Valor final da conversão de fahrenheit para a temperatura selecionada.
  */
 function fahrenheit(medida, alvo) {
-    if(alvo == 'celcius'){
+    if(alvo === 'celcius'){
         return (medida-32)/1.8
-    }else if(alvo == 'kelvin'){
+    }else if(alvo === 'kelvin'){
         return (medida - 32)/1.8 + 273.15
     }
 }
@@ -273,26 +273,26 @@ function fahrenheit(medida, alvo) {
  * @returns {number} Valor final da conversão selecionada.
  */
 function converterMoeda () {
-    if(medidaAtual == 'real') {
-        if(medidaAlvo == 'dolar'){
+    if(medidaAtual === 'real') {
+        if(medidaAlvo === 'dolar'){
             valorFinal = Number(real(valorInicial, 'dolar'))
-        } else if(medidaAlvo == 'euro'){
+        } else if(medidaAlvo === 'euro'){
             valorFinal = Number(real(valorInicial, 'euro'))
         } else {
             valorFinal = valorInicial
         }
-    } else if(medidaAtual == 'dolar') {
-        if(medidaAlvo == 'real'){
+    } else if(medidaAtual === 'dolar') {
+        if(medidaAlvo === 'real'){
             valorFinal = Number(dolar(valorInicial, 'real'))
-        } else if(medidaAlvo == 'euro'){
+        } else if(medidaAlvo === 'euro'){
             valorFinal = Number(dolar(valorInicial, 'euro'))
         }else {
             valorFinal = valorInicial
         }
-    } else if(medidaAtual == 'euro') {
-        if(medidaAlvo == 'real'){
+    } else if(medidaAtual === 'euro') {
+        if(medidaAlvo === 'real'){
             valorFinal = Number(euro(valorInicial, 'real'))
-        } else if(medidaAlvo == 'dolar'){
+        } else if(medidaAlvo === 'dolar'){
             valorFinal = Number(euro(valorInicial, 'dolar'))
         }else {
             valorFinal = valorInicial
@@ -308,9 +308,9 @@ function converterMoeda () {
  * @returns {number} Valor final da conversão de real para a moeda selecionada.
  */
 function real(medida, alvo) {
-    if(alvo == 'dolar'){
+    if(alvo === 'dolar'){
         return medida * 5.41
-    } else if(alvo == 'euro'){
+    } else if(alvo === 'euro'){
         return medida * 5.45
     }
 }
@@ -322,9 +322,9 @@ function real(medida, alvo) {
  * @returns {number} Valor final da conversão de dólar para a moeda selecionada.
  */
 function dolar(medida, alvo) {
-    if(alvo == 'real'){
+    if(alvo === 'real'){
         return medida * 5.41
-    }else if(alvo == 'euro'){
+    }else if(alvo === 'euro'){
         return medida / 1.01
     }
 }
@@ -336,9 +336,9 @@ function dolar(medida, alvo) {
  * @returns {number} Valor final da conversão de euro para a moeda selecionada.
  */
 function euro(medida, alvo) {
-    if(alvo == 'real'){
+    if(alvo === 'real'){
         return medida * 5.45
-    }else if(alvo == 'dolar'){
+    }else if(alvo === 'dolar'){
         return medida * 1.01
     }
 }
