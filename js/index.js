@@ -29,18 +29,17 @@ var selectMedidaAlvo  = dom.getElementById('select_medida_alvo')
  */
 var medidaAtual, medidaAlvo
 
-
 /**
  * Variáveis que representam o valor final e o valor inicial das conversões
  * @var {number} valorFinal
  * @var {number} valorInicial
  */
 var valorFinal, valorInicial
+
 /** 
  * Função executada quando a página é carregada, inicializando o select de tipos de medidas.
 */
 function load() {
-    
     selectMedidaAtual.innerHTML  = '<option value="centimetro">Centímetro</option>'
     selectMedidaAtual.innerHTML += '<option value="metro">Metro</option>'
     selectMedidaAtual.innerHTML += '<option value="quilometro">Quilometro</option>'
@@ -55,7 +54,6 @@ function load() {
  * selects de medida atual e medida alvo.
  */
 function onChange() {
-
     switch(selectTipoMedida.value) {
         case 'distancia':
             selectMedidaAtual.innerHTML  = '<option value="centimetro">Centímetro</option>'
@@ -89,7 +87,6 @@ function onChange() {
     }
     inputMedidaAtual.value = ''
     inputMedidaAlvo.value  = ''
-
 }
 
 /**
@@ -98,16 +95,12 @@ function onChange() {
  * a função de conversão correspondente ao tipo de medida selecionado, senão exibe um alerta.
  */
 function converter() {
-
-    valorInicial = inputMedidaAtual.value
-
     medidaAtual = selectMedidaAtual.value
     medidaAlvo = selectMedidaAlvo.value
 
-    if(inputMedidaAtual.value.length == 0 || inputMedidaAtual.value == null){
-        window.alert('Informe o valor antes de realizar a conversão!')
-    } else {
+    if(inputMedidaAtual.value.length || inputMedidaAtual.value){
         var tipoMedida = selectTipoMedida.value
+        valorInicial = inputMedidaAtual.value
 
         if(tipoMedida == 'distancia'){
             inputMedidaAlvo.value = converterDistancia()
@@ -116,6 +109,10 @@ function converter() {
         } else if(tipoMedida == 'moeda') {
             inputMedidaAlvo.value = converterMoeda()
         }
+    } else {
+        window.alert('Informe o valor antes de realizar a conversão!')
+        inputMedidaAtual.value = ''
+        inputMedidaAlvo.value  = ''
     }
 }
 
