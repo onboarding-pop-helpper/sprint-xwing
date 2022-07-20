@@ -2,15 +2,15 @@
  * Variável que representa o document
  * @var {Document} dom
  */
-var dom = window.document
+const dom = window.document
 
 /**
  * Variáveis que representam os inputs medida atual e medida alvo
  * @var {HTMLElement | null} inputMedidaAtual
  * @var {HTMLElement | null} inputMedidaAlvo
  */
-var inputMedidaAtual = dom.getElementById('input_medida_atual')
-var inputMedidaAlvo  = dom.getElementById('input_medida_alvo')
+const inputMedidaAtual = dom.getElementById('input_medida_atual')
+const inputMedidaAlvo  = dom.getElementById('input_medida_alvo')
 
 /**
  * Variáveis que representam os selects tipo medida, medida atual e medida alvo
@@ -18,23 +18,23 @@ var inputMedidaAlvo  = dom.getElementById('input_medida_alvo')
  * @var {HTMLElement | null} selectMedidaAtual
  * @var {HTMLElement | null} selectMedidaAlvo
  */
-var selectTipoMedida  = dom.getElementById('tipo_medida')
-var selectMedidaAtual = dom.getElementById('select_medida_atual')
-var selectMedidaAlvo  = dom.getElementById('select_medida_alvo')
+const selectTipoMedida  = dom.getElementById('tipo_medida')
+const selectMedidaAtual = dom.getElementById('select_medida_atual')
+const selectMedidaAlvo  = dom.getElementById('select_medida_alvo')
 
 /**
  * Variáveis que representam os valores selecionados nos selects, os valores são atribuidos nos métodos de conversão
  * @var {string} medidaAtual
  * @var {string} medidaAlvo
  */
-var medidaAtual, medidaAlvo
+let medidaAtual, medidaAlvo
 
 /**
  * Variáveis que representam o valor final e o valor inicial das conversões
  * @var {number} valorFinal
  * @var {number} valorInicial
  */
-var valorFinal, valorInicial
+let valorFinal, valorInicial
 
 /** 
  * Função executada quando a página é carregada, inicializando o select de tipos de medidas.
@@ -99,7 +99,7 @@ function converter() {
     medidaAlvo = selectMedidaAlvo.value
 
     if(inputMedidaAtual.value.length || inputMedidaAtual.value){
-        var tipoMedida = selectTipoMedida.value
+        const tipoMedida = selectTipoMedida.value
         valorInicial = inputMedidaAtual.value
 
         if(tipoMedida === 'distancia'){
