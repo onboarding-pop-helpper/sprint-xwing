@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Variável que representa o document
+ * @var {Document} dom
+ */
+var dom = window.document
+
+/**
+ * Variáveis que representam os inputs medida atual e medida alvo
+ * @var {HTMLElement | null} inputMedidaAtual
+ * @var {HTMLElement | null} inputMedidaAlvo
+ */
+var inputMedidaAtual = dom.getElementById('input_medida_atual')
+var inputMedidaAlvo  = dom.getElementById('input_medida_alvo')
+
+/**
+ * Variáveis que representam os selects tipo medida, medida atual e medida alvo
+ * @var {HTMLElement | null} selectTipoMedida
+ * @var {HTMLElement | null} selectMedidaAtual
+ * @var {HTMLElement | null} selectMedidaAlvo
+ */
+var selectTipoMedida  = dom.getElementById('tipo_medida')
+var selectMedidaAtual = dom.getElementById('select_medida_atual')
+var selectMedidaAlvo  = dom.getElementById('select_medida_alvo')
+
+/**
+ * Variáveis que representam os valores selecionados nos selects, os valores são atribuidos nos métodos de conversão
+ * @var {string} medidaAtual
+ * @var {string} medidaAlvo
+ */
+var medidaAtual, medidaAlvo
+
+
+/**
+ * Variáveis que representam o valor final e o valor inicial das conversões
+ * @var {number} valorFinal
+ * @var {number} valorInicial
+ */
+var valorFinal, valorInicial
+/** 
+ * Função executada quando a página é carregada, inicializando o select de tipos de medidas.
+*/
+function load() {
+    
+    selectMedidaAtual.innerHTML  = '&lt;option value="centimetro">Centímetro&lt;/option>'
+    selectMedidaAtual.innerHTML += '&lt;option value="metro">Metro&lt;/option>'
+    selectMedidaAtual.innerHTML += '&lt;option value="quilometro">Quilometro&lt;/option>'
+            
+    selectMedidaAlvo.innerHTML   = '&lt;option value="centimetro">Centímetro&lt;/option>'
+    selectMedidaAlvo.innerHTML  += '&lt;option value="metro">Metro&lt;/option>'
+    selectMedidaAlvo.innerHTML  += '&lt;option value="quilometro">Quilometro&lt;/option>'
+}
+
+/**
+ * Função executada quando ocorre uma mudança no select de tipos de medidas, atualizando os 
+ * selects de medida atual e medida alvo.
+ */
+function onChange() {
+
+    switch(selectTipoMedida.value) {
+        case 'distancia':
+            selectMedidaAtual.innerHTML  = '&lt;option value="centimetro">Centímetro&lt;/option>'
+            selectMedidaAtual.innerHTML += '&lt;option value="metro">Metro&lt;/option>'
+            selectMedidaAtual.innerHTML += '&lt;option value="quilometro">Quilometro&lt;/option>'
+
+            selectMedidaAlvo.innerHTML   = '&lt;option value="centimetro">Centímetro&lt;/option>'
+            selectMedidaAlvo.innerHTML  += '&lt;option value="metro">Metro&lt;/option>'
+            selectMedidaAlvo.innerHTML  += '&lt;option value="quilometro">Quilometro&lt;/option>'
+
+            break;
+        case 'temperatura':
+            selectMedidaAtual.innerHTML  = '&lt;option value="celcius">Celcius&lt;/option>'
+            selectMedidaAtual.innerHTML += '&lt;option value="kelvin">Kelvin&lt;/option>'
+            selectMedidaAtual.innerHTML += '&lt;option value="fahrenheit">Fahrenheit&lt;/option>'
+
+            selectMedidaAlvo.innerHTML   = '&lt;option value="celcius">Celcius&lt;/option>'
+            selectMedidaAlvo.innerHTML  += '&lt;option value="kelvin">Kelvin&lt;/option>'
+            selectMedidaAlvo.innerHTML  += '&lt;option value="fahrenheit">Fahrenheit&lt;/option>'
+
+            break;
+        case 'moeda':
+            selectMedidaAtual.innerHTML  = '&lt;option value="real">Real&lt;/option>'
+            selectMedidaAtual.innerHTML += '&lt;option value="dolar">Dólar&lt;/option>'
+            selectMedidaAtual.innerHTML += '&lt;option value="euro">Euro&lt;/option>'
+
+            selectMedidaAlvo.innerHTML   = '&lt;option value="real">Real&lt;/option>'
+            selectMedidaAlvo.innerHTML  += '&lt;option value="dolar">Dólar&lt;/option>'
+            selectMedidaAlvo.innerHTML  += '&lt;option value="euro">Euro&lt;/option>'
+            break;
+    }
+    inputMedidaAtual.value = ''
+    inputMedidaAlvo.value  = ''
+
+}
+
+/**
+ * Função executada no onClick do botão converte. 
+ * Verifica se o campo input medida atual tem um valor válido. Se o valor for válido, executa 
+ * a função de conversão correspondente ao tipo de medida selecionado, senão exibe um alerta.
+ */
+function converter() {
+
+    valorInicial = inputMedidaAtual.value
+
+    medidaAtual = selectMedidaAtual.value
+    medidaAlvo = selectMedidaAlvo.value
+
+    if(inputMedidaAtual.value.length == 0 || inputMedidaAtual.value == null){
+        window.alert('Informe o valor antes de realizar a conversão!')
+    } else {
+        var tipoMedida = selectTipoMedida.value
+
+        if(tipoMedida == 'distancia'){
+            inputMedidaAlvo.value = converterDistancia()
+        } else if(tipoMedida == 'temperatura'){
+            inputMedidaAlvo.value = converterTemperatura()
+        } else if(tipoMedida == 'moeda') {
+            inputMedidaAlvo.value = converterMoeda()
+        }
+    }
+}
+
+/**
+ * Função executada quando tipo de medida selecionado é distância.
+ * Verifica as medidas selecionadas para a conversão e chama a função responsável por aquela conversão.
+ * @returns {number} Valor final da conversão selecionada.
+ */
+function converterDistancia () {
+    if(medidaAtual == 'centimetro') {
+        if(medidaAlvo == 'metro'){
+            valorFinal = Number(centimetro(valorInicial, 'metro'))
+        } else if(medidaAlvo == 'quilometro'){
+            valorFinal = Number(centimetro(valorInicial, 'quilometro'))
+        } else {
+            valorFinal = valorInicial
+        }
+    } else if(medidaAtual == 'metro') {
+        if(medidaAlvo == 'centimetro'){
+            valorFinal = Number(metro(valorInicial, 'centimetro'))
+        } else if(medidaAlvo == 'quilometro'){
+            valorFinal = Number(metro(valorInicial, 'quilometro'))
+        }else {
+            valorFinal = valorInicial
+        }
+    } else if(medidaAtual == 'quilometro') {
+        if(medidaAlvo == 'centimetro'){
+            valorFinal = Number(quilometro(valorInicial, 'centimetro'))
+        } else if(medidaAlvo == 'metro'){
+            valorFinal = Number(quilometro(valorInicial, 'metro'))
+        }else {
+            valorFinal = valorInicial
+        }
+    }
+    return valorFinal
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é o centímetro, verificando a medida alvo para realizar a conversão
+ * @param {number} medida - Valor a ser convertido
+ * @param {string} alvo - Medida alvo da conversão
+ * @returns {number} Valor final da conversão de centímetro para a medida alvo
+ */
+function centimetro(medida, alvo) {
+    if(alvo == 'metro'){
+        return medida / 100
+    } else if(alvo == 'quilometro'){
+        return medida / 100000
+    }
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é o metro, verificando a medida alvo para realizar a conversão
+ * @param {number} medida - Valor a ser convertido
+ * @param {string} alvo - Medida alvo da conversão
+ * @returns {number} Valor final da conversão de metro para a medida alvo
+ */
+function metro(medida, alvo) {
+    if(alvo == 'centimetro'){
+        return medida * 100
+    }else if(alvo == 'quilometro'){
+        return medida / 1000
+    }
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é o quilômetro, verificando a medida alvo para realizar a conversão
+ * @param {number} medida - Valor a ser convertido
+ * @param {string} alvo - Medida alvo da conversão
+ * @returns {number} Valor final da conversão de quilômetro para a medida alvo
+ */
+function quilometro(medida, alvo) {
+    if(alvo == 'centimetro'){
+        return medida * 100000
+    }else if(alvo == 'metro'){
+        return medida * 1000
+    }
+}
+
+/**
+ * Função executada quando tipo de medida selecionado é temperatura.
+ * Verifica as medidas selecionadas para a conversão e chama a função responsável por aquela conversão.
+ * @returns {number} Valor final da conversão selecionada.
+ */
+function converterTemperatura () {
+    if(medidaAtual == 'celcius') {
+        if(medidaAlvo == 'kelvin'){
+            valorFinal = Number(celcius(valorInicial, 'kelvin'))
+        } else if(medidaAlvo == 'fahrenheit'){
+            valorFinal = Number(celcius(valorInicial, 'fahrenheit'))
+        } else {
+            valorFinal = valorInicial
+        }
+    } else if(medidaAtual == 'kelvin') {
+        if(medidaAlvo == 'celcius'){
+            valorFinal = Number(kelvin(valorInicial, 'celcius'))
+        } else if(medidaAlvo == 'fahrenheit'){
+            valorFinal = Number(kelvin(valorInicial, 'fahrenheit'))
+        }else {
+            valorFinal = valorInicial
+        }
+    } else if(medidaAtual == 'fahrenheit') {
+        if(medidaAlvo == 'celcius'){
+            valorFinal = Number(fahrenheit(valorInicial, 'celcius'))
+        } else if(medidaAlvo == 'kelvin'){
+            valorFinal = Number(fahrenheit(valorInicial, 'kelvin'))
+        }else {
+            valorFinal = valorInicial
+        }
+    }
+    return valorFinal
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é celcius, verificando a medida alvo para realizar a conversão.
+ * @param {number} medida - Valor a ser convertido.
+ * @param {string} alvo - Medida alvo da conversão.
+ * @returns {number} Valor final da conversão de celcius para a temperatura selecionada.
+ */
+function celcius(medida, alvo) {
+    if(alvo == 'kelvin'){
+        return medida * 1 + 273.15
+    } else if(alvo == 'fahrenheit'){
+        return medida * 1.8 + 32
+    }
+}
+/**
+ * Função executada quando a medida inicial selecionada é kelvin, verificando a medida alvo para realizar a conversão.
+ * @param {number} medida - Valor a ser convertido.
+ * @param {string} alvo - Medida alvo da conversão.
+ * @returns {number} Valor final da conversão de kelvin para a temperatura selecionada.
+ */
+function kelvin(medida, alvo) {
+    if(alvo == 'celcius'){
+        return medida - 273.15
+    }else if(alvo == 'fahrenheit'){
+        return (medida - 273.15) * 1.8 + 32
+    }
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é fahrenheit, verificando a medida alvo para realizar a conversão.
+ * @param {number} medida - Valor a ser convertido.
+ * @param {string} alvo - Medida alvo da conversão.
+ * @returns {number} Valor final da conversão de fahrenheit para a temperatura selecionada.
+ */
+function fahrenheit(medida, alvo) {
+    if(alvo == 'celcius'){
+        return (medida-32)/1.8
+    }else if(alvo == 'kelvin'){
+        return (medida - 32)/1.8 + 273.15
+    }
+}
+
+/**
+ * Função executada quando tipo de medida selecionado é moeda.
+ * Verifica as medidas selecionadas para a conversão e chama a função responsável por aquela conversão.
+ * @returns {number} Valor final da conversão selecionada.
+ */
+function converterMoeda () {
+    if(medidaAtual == 'real') {
+        if(medidaAlvo == 'dolar'){
+            valorFinal = Number(real(valorInicial, 'dolar'))
+        } else if(medidaAlvo == 'euro'){
+            valorFinal = Number(real(valorInicial, 'euro'))
+        } else {
+            valorFinal = valorInicial
+        }
+    } else if(medidaAtual == 'dolar') {
+        if(medidaAlvo == 'real'){
+            valorFinal = Number(dolar(valorInicial, 'real'))
+        } else if(medidaAlvo == 'euro'){
+            valorFinal = Number(dolar(valorInicial, 'euro'))
+        }else {
+            valorFinal = valorInicial
+        }
+    } else if(medidaAtual == 'euro') {
+        if(medidaAlvo == 'real'){
+            valorFinal = Number(euro(valorInicial, 'real'))
+        } else if(medidaAlvo == 'dolar'){
+            valorFinal = Number(euro(valorInicial, 'dolar'))
+        }else {
+            valorFinal = valorInicial
+        }
+    }
+    return valorFinal
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é real, verificando a medida alvo para realizar a conversão.
+ * @param {number} medida - Valor a ser convertido.
+ * @param {string} alvo - Medida alvo da conversão.
+ * @returns {number} Valor final da conversão de real para a moeda selecionada.
+ */
+function real(medida, alvo) {
+    if(alvo == 'dolar'){
+        return medida * 5.41
+    } else if(alvo == 'euro'){
+        return medida * 5.45
+    }
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é dólar, verificando a medida alvo para realizar a conversão.
+ * @param {number} medida - Valor a ser convertido.
+ * @param {string} alvo - Medida alvo da conversão.
+ * @returns {number} Valor final da conversão de dólar para a moeda selecionada.
+ */
+function dolar(medida, alvo) {
+    if(alvo == 'real'){
+        return medida * 5.41
+    }else if(alvo == 'euro'){
+        return medida / 1.01
+    }
+}
+
+/**
+ * Função executada quando a medida inicial selecionada é euro, verificando a medida alvo para realizar a conversão.
+ * @param {number} medida - Valor a ser convertido.
+ * @param {string} alvo - Medida alvo da conversão.
+ * @returns {number} Valor final da conversão de euro para a moeda selecionada.
+ */
+function euro(medida, alvo) {
+    if(alvo == 'real'){
+        return medida * 5.45
+    }else if(alvo == 'dolar'){
+        return medida * 1.01
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#celcius">celcius</a></li><li><a href="global.html#centimetro">centimetro</a></li><li><a href="global.html#converter">converter</a></li><li><a href="global.html#converterDistancia">converterDistancia</a></li><li><a href="global.html#converterMoeda">converterMoeda</a></li><li><a href="global.html#converterTemperatura">converterTemperatura</a></li><li><a href="global.html#dolar">dolar</a></li><li><a href="global.html#dom">dom</a></li><li><a href="global.html#euro">euro</a></li><li><a href="global.html#fahrenheit">fahrenheit</a></li><li><a href="global.html#inputMedidaAlvo">inputMedidaAlvo</a></li><li><a href="global.html#kelvin">kelvin</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#medidaAlvo">medidaAlvo</a></li><li><a href="global.html#metro">metro</a></li><li><a href="global.html#onChange">onChange</a></li><li><a href="global.html#quilometro">quilometro</a></li><li><a href="global.html#real">real</a></li><li><a href="global.html#selectMedidaAlvo">selectMedidaAlvo</a></li><li><a href="global.html#valorInicial">valorInicial</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Jul 20 2022 10:38:19 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
