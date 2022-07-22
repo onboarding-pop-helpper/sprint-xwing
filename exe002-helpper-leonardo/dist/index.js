@@ -1,15 +1,51 @@
 "use strict";
+/**
+ * Variável que representa o document
+ */
 const dom = window.document;
+/**
+ * Variável que representa o botão de conversão
+ */
 const buttonConverte = dom.getElementById("botao_converte");
+/**
+ * Variável que representa o select de tipo de medida.
+ */
 const selectTipoMedida = dom.getElementById("tipo_medida");
+/**
+ * Variável que representa o select de medida atual.
+ */
 const selectMedidaAtual = dom.getElementById("select_medida_atual");
+/**
+ * Variável que representa o select de tipo de medida.
+ */
 const selectMedidaAlvo = dom.getElementById("select_medida_alvo");
+/**
+ * Variável que representa o input de medida atual.
+ */
 const inputMedidaAtual = dom.getElementById("input_medida_atual");
+/**
+ * Variável que representa o input de medida alvo.
+ */
 const inputMedidaAlvo = dom.getElementById("input_medida_alvo");
+/**
+ * Variável que representa o valor inicial da conversão.
+ */
 let valorInicial;
+/**
+ * Variável que representa a medida atual da conversão.
+ */
 let medidaAtual;
+/**
+ * Variável que representa a medida alvo da conversão.
+ */
 let medidaAlvo;
+/**
+ * Variável que representa o valor final da conversão.
+ */
 let valorFinal;
+/**
+ * Função executadaquando o body é carregado, inicializando os selects de medida atual e medida alvo.
+ */
 dom.body.onload = () => {
     selectMedidaAtual.innerHTML = '<option value="centimetro">Centímetro</option>';
     selectMedidaAtual.innerHTML += '<option value="metro">Metro</option>';
@@ -18,6 +54,10 @@ dom.body.onload = () => {
     selectMedidaAlvo.innerHTML += '<option value="metro">Metro</option>';
     selectMedidaAlvo.innerHTML += '<option value="quilometro">Quilometro</option>';
 };
+/**
+ * Função executada quando o valor do select de tipos de medida é alterado, atualizando os selects de medida
+ * atual e medida alvo.
+ */
 selectTipoMedida.onchange = () => {
     switch (selectTipoMedida.value) {
         case "distancia":
@@ -48,58 +88,68 @@ selectTipoMedida.onchange = () => {
     inputMedidaAtual.value = "";
     inputMedidaAlvo.value = "";
 };
+/**
+ * Função executada quando o botão de conversão é clicado.
+ * Valida o input de medida atual, se for válido executa a função de conversão, senão,
+ * exibe um alerta.
+ */
 buttonConverte.onclick = () => {
     valorInicial = Number(inputMedidaAtual.value);
     medidaAtual = selectMedidaAtual.value;
     medidaAlvo = selectMedidaAlvo.value;
-    if (inputMedidaAtual.value.length == 0 || inputMedidaAtual.value == null) {
-        window.alert("Informe o valor antes de realizar a conversão!");
-    }
-    else {
+    if (inputMedidaAtual.value.length || inputMedidaAtual.value) {
         let tipoMedida = selectTipoMedida.value;
-        if (tipoMedida == "distancia") {
+        if (tipoMedida === "distancia") {
             inputMedidaAlvo.value = converterDistancia().toString();
         }
-        else if (tipoMedida == "temperatura") {
+        else if (tipoMedida === "temperatura") {
             inputMedidaAlvo.value = converterTemperatura().toString();
         }
-        else if (tipoMedida == "moeda") {
+        else if (tipoMedida === "moeda") {
             inputMedidaAlvo.value = converterMoeda().toString();
         }
     }
+    else {
+        window.alert("Informe o valor antes de realizar a conversão!");
+    }
 };
-// Funções para conversão de distância
+/**
+ * Função executada quando o tipo de medida selecionado é distância.
+ * Verifica as medidas selecionadas para a conversão, instancia um objeto da classe da conversão, e
+ * chama a função da conversão selecionada
+ * @returns {number} Valor final da conversão selecionada.
+ */
 function converterDistancia() {
-    if (medidaAtual == "centimetro") {
+    if (medidaAtual === "centimetro") {
         let centimetro = new Centimetro(valorInicial);
-        if (medidaAlvo == "metro") {
+        if (medidaAlvo === "metro") {
             valorFinal = centimetro.toMetro();
         }
-        else if (medidaAlvo == "quilometro") {
+        else if (medidaAlvo === "quilometro") {
             valorFinal = centimetro.toQuilometro();
         }
         else {
             valorFinal = centimetro.toCentimetro();
         }
     }
-    else if (medidaAtual == "metro") {
+    else if (medidaAtual === "metro") {
         let metro = new Metro(valorInicial);
-        if (medidaAlvo == "centimetro") {
+        if (medidaAlvo === "centimetro") {
             valorFinal = metro.toCentimetro();
         }
-        else if (medidaAlvo == "quilometro") {
+        else if (medidaAlvo === "quilometro") {
             valorFinal = metro.toQuilometro();
         }
         else {
             valorFinal = metro.toMetro();
         }
     }
-    else if (medidaAtual == "quilometro") {
+    else if (medidaAtual === "quilometro") {
         let quilometro = new Quilometro(valorInicial);
-        if (medidaAlvo == "centimetro") {
+        if (medidaAlvo === "centimetro") {
             valorFinal = quilometro.toCentimetro();
         }
-        else if (medidaAlvo == "metro") {
+        else if (medidaAlvo === "metro") {
             valorFinal = quilometro.toMetro();
         }
         else {
@@ -108,38 +158,43 @@ function converterDistancia() {
     }
     return valorFinal;
 }
-// Funções para conversão de temperatura
+/**
+ * Função executada quando o tipo de medida selecionado é temperatura.
+ * Verifica as medidas selecionadas para a conversão, instancia um objeto da classe da conversão, e
+ * chama a função da conversão selecionada
+ * @returns {number} Valor final da conversão selecionada.
+ */
 function converterTemperatura() {
-    if (medidaAtual == "celcius") {
+    if (medidaAtual === "celcius") {
         let celcius = new Celcius(valorInicial);
-        if (medidaAlvo == "kelvin") {
+        if (medidaAlvo === "kelvin") {
             valorFinal = celcius.toKelvin();
         }
-        else if (medidaAlvo == "fahrenheit") {
+        else if (medidaAlvo === "fahrenheit") {
             valorFinal = celcius.toFahrenheit();
         }
         else {
             valorFinal = celcius.toCelcius();
         }
     }
-    else if (medidaAtual == "kelvin") {
+    else if (medidaAtual === "kelvin") {
         let kelvin = new Kelvin(valorInicial);
-        if (medidaAlvo == "celcius") {
+        if (medidaAlvo === "celcius") {
             valorFinal = kelvin.toCelcius();
         }
-        else if (medidaAlvo == "fahrenheit") {
+        else if (medidaAlvo === "fahrenheit") {
             valorFinal = kelvin.toFahrenheit();
         }
         else {
             valorFinal = kelvin.toKelvin();
         }
     }
-    else if (medidaAtual == "fahrenheit") {
+    else if (medidaAtual === "fahrenheit") {
         let fahrenheit = new Fahrenheit(valorInicial);
-        if (medidaAlvo == "celcius") {
+        if (medidaAlvo === "celcius") {
             valorFinal = fahrenheit.toCelcius();
         }
-        else if (medidaAlvo == "kelvin") {
+        else if (medidaAlvo === "kelvin") {
             valorFinal = fahrenheit.toKelvin();
         }
         else {
@@ -148,38 +203,43 @@ function converterTemperatura() {
     }
     return valorFinal;
 }
-// Funções para conversão de moeda
+/**
+ * Função executada quando o tipo de medida selecionado é moeda.
+ * Verifica as medidas selecionadas para a conversão, instancia um objeto da classe da conversão, e
+ * chama a função da conversão selecionada
+ * @returns {number} Valor final da conversão selecionada.
+ */
 function converterMoeda() {
-    if (medidaAtual == "real") {
+    if (medidaAtual === "real") {
         let real = new Real(valorInicial);
-        if (medidaAlvo == "dolar") {
+        if (medidaAlvo === "dolar") {
             valorFinal = real.toDolar();
         }
-        else if (medidaAlvo == "euro") {
+        else if (medidaAlvo === "euro") {
             valorFinal = real.toEuro();
         }
         else {
             valorFinal = real.toReal();
         }
     }
-    else if (medidaAtual == "dolar") {
+    else if (medidaAtual === "dolar") {
         let dolar = new Dolar(valorInicial);
-        if (medidaAlvo == "real") {
+        if (medidaAlvo === "real") {
             valorFinal = dolar.toReal();
         }
-        else if (medidaAlvo == "euro") {
+        else if (medidaAlvo === "euro") {
             valorFinal = dolar.toEuro();
         }
         else {
             valorFinal = dolar.toDolar();
         }
     }
-    else if (medidaAtual == "euro") {
+    else if (medidaAtual === "euro") {
         let euro = new Euro(valorInicial);
-        if (medidaAlvo == "real") {
+        if (medidaAlvo === "real") {
             valorFinal = euro.toReal();
         }
-        else if (medidaAlvo == "dolar") {
+        else if (medidaAlvo === "dolar") {
             valorFinal = euro.toDolar();
         }
         else {
