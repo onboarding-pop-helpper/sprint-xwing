@@ -1,0 +1,3 @@
+interface MedidasInterface {
+    valor : number
+}
