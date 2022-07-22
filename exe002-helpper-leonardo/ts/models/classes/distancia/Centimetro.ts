@@ -1,4 +1,8 @@
 class Centimetro extends Distancia {
+  constructor(valor: number) {
+    super(valor)
+  }
+
   toCentimetro(): number {
     return this.valor;
   }

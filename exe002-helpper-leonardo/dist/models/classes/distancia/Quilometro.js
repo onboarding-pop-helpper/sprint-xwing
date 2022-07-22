@@ -1,5 +1,8 @@
 "use strict";
 class Quilometro extends Distancia {
+    constructor(valor) {
+        super(valor);
+    }
     toCentimetro() {
         return this.valor * 100000;
     }

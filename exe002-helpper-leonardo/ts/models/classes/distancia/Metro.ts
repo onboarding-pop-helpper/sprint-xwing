@@ -1,4 +1,8 @@
 class Metro extends Distancia {
+  constructor(valor: number) {
+    super(valor);
+  }
+  
   toCentimetro(): number {
     return this.valor * 100;
   }

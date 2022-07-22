@@ -1,5 +1,8 @@
 "use strict";
 class Metro extends Distancia {
+    constructor(valor) {
+        super(valor);
+    }
     toCentimetro() {
         return this.valor * 100;
     }

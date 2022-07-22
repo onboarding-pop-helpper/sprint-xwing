@@ -1,3 +1,3 @@
 "use strict";
-var teste = new Centimetro(1);
-window.alert(teste.valor);
+var teste = new Metro(1);
+window.alert(2);
