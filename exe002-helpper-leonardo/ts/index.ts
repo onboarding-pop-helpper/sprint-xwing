@@ -11,15 +11,15 @@ const buttonConverte   = dom.getElementById("botao_converte") as HTMLInputElemen
 /**
  * Variável que representa o select de tipo de medida.
  */
-const selectTipoMedida = dom.getElementById("tipo_medida") as HTMLInputElement;
+const selectTipoMedida = dom.getElementById("tipo_medida") as HTMLSelectElement;
 /**
  * Variável que representa o select de medida atual.
  */
-const selectMedidaAtual = dom.getElementById("select_medida_atual") as HTMLInputElement;
+const selectMedidaAtual = dom.getElementById("select_medida_atual") as HTMLSelectElement;
 /**
  * Variável que representa o select de tipo de medida.
  */
-const selectMedidaAlvo  = dom.getElementById("select_medida_alvo") as HTMLInputElement;
+const selectMedidaAlvo  = dom.getElementById("select_medida_alvo") as HTMLSelectElement;
 
 /**
  * Variável que representa o input de medida atual.
