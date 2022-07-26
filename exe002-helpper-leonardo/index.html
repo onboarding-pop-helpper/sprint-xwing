@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <title>Conversor de medidas</title>
+</head>
+<body>
+    
+    <header id="header">
+        <h1>Conversor de medidas</h1>
+    </header>
+
+    <section id="main_section">
+        <section id="section_conversao">
+            <div id="div_tipo_medidas">
+                <p>Escolha um tipo de medida</p>
+                <select id="tipo_medida">
+                    <option value="distancia" selected>Distância</option>
+                    <option value="temperatura">Temperatura</option>
+                    <option value="moeda">Moeda</option>
+                </select>
+            </div>
+
+            <section class="section_medidas">
+                <div class="div_medidas">
+                    <p>Informe a medida e o valor: </p>
+                    <input type="number" id="input_medida_atual" class="input_medida">
+                    <select id="select_medida_atual" class="select_medidas"></select>
+                </div>
+                <input type="button" value="converter" id="botao_converte">
+                <div class="div_medidas">
+                    <p>Informe a medida: </p>
+                    <input type="number" id="input_medida_alvo" class="input_medida" disabled> 
+                    <select id="select_medida_alvo" class="select_medidas"></select>
+                </div>
+            </section>
+        </section>
+    </section>
+    
+    <!-- script da classe medida -->
+    <script type="text/javascript" src="./dist/models/classes/medida.js"></script>
+
+    <!-- script das classes de moedas -->
+    <script src="./dist/models/classes/moeda/moeda.js"></script>
+    <script src="./dist/models/classes/moeda/real.js"></script>
+    <script src="./dist/models/classes/moeda/dolar.js"></script>
+    <script src="./dist/models/classes/moeda/euro.js"></script>
+
+    <!-- script das classes de temperatura -->
+    <script src="./dist/models/classes/temperatura/temperatura.js"></script>
+    <script src="./dist/models/classes/temperatura/celcius.js"></script>
+    <script src="./dist/models/classes/temperatura/fahrenheit.js"></script>
+    <script src="./dist/models/classes/temperatura/kelvin.js"></script>
+    
+    <!-- script das classes de distância -->
+    <script src="./dist/models/classes/distancia/distancia.js"></script>
+    <script src="./dist/models/classes/distancia/centimetro.js"></script>
+    <script src="./dist/models/classes/distancia/metro.js"></script>
+    <script src="./dist/models/classes/distancia/quilometro.js"></script>
+
+    <!-- script do index.js -->
+    <script type="module" src="./dist/index.js"></script>
+</body>
+</html>
