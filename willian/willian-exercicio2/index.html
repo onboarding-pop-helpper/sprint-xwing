@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversões Willian</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <header>
+        <h1>Exercício 2 - Willian</h1>
+        <p>Vamos fazer algumas conversões de unidades com TypeScript e Classes <3.</p>
+    </header>
+    <section id="section_general">
+        <div class="conversao" id="convert01">
+            <h2>Metros para Centímetros</h2>
+            Valor em  metros: 
+            <br>
+            <input type="number" id="inputMetro" class="input-number">
+            <br>
+            <input type="button" value="Converter" class="input-button" onclick="exercicio02.convertMetroCentimetro()">
+            <br>
+            O em centímetros é:
+            <br> 
+            <label id="lblCent" for="text"><strong>cm</strong></label>
+        </div>       
+        <div class="conversao">
+            <h2>Centímetros para Metros</h2>
+            Valor em centímetros: 
+            <br>
+            <input type="number" id="inputCent" class="input-number">
+            <br>
+            <input type="button" value="Converter" class="input-button" onclick="exercicio02.convertCentimetroMetro()"> 
+            <br>
+            O valor em metros é:
+            <br>
+            <label id="lblMet" for="text"><strong>m</strong></label>
+        </div>
+        <div class="conversao">
+            <h2>Farenheit para Celcius</h2>
+            Valor farenheit: 
+            <br>
+            <input type="number" id="inputFaren" class="input-number">
+            <br>
+            <input type="button" value="Converter" class="input-button" onclick="exercicio02.convertFarenheitCelcius()">
+            <br>
+            O valor em celcius é:
+            <br> 
+            <label id="lblCel" for="text"><strong>°C</strong></label>
+        </div>
+        <div class="conversao">
+            <h2>Celcius para Farenheit</h2>
+            Valor celcius: 
+            <br>
+            <input type="number" id="inputCelcius" class="input-number">
+            <br>
+            <input type="button" value="Converter" class="input-button" onclick="exercicio02.convertCelciusFarenheit()"> 
+            <br>
+            O valor em farenheit é:
+            <br>
+            <label id="lblFar" for="text"><strong>°F</strong></label>
+        </div>
+        <div class="conversao">
+            <h2>Real para Dolar</h2>
+            Valor em reais: 
+            <br>
+            <input type="number" id="inputReal" class="input-number">
+            <br>
+            <input type="button" value="Converter" class="input-button" onclick="exercicio02.convertRealDolar()"> 
+            <br>
+            O valor em dolares é:
+            <br>
+            <label id="lblDol" for="text"><strong>US$</strong></label>
+        </div>
+        <div class="conversao">
+            <h2>Dolar para Real</h2>
+            Valor em dolar: 
+            <br>
+            <input type="number" id="inputDolar" class="input-number">
+            <br>
+            <input type="button" value="Converter" class="input-button" onclick="exercicio02.convertDolarReal()">
+            <br>
+            O valor em reais é:
+            <br>
+            <label id="lblReal" for="text"><strong>R$</strong></label>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; Willian Martins</p>    
+    </footer>
+
+    <script src="dist/exe02.js"></script>
+</body>
+</html>
